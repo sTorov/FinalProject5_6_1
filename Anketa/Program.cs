@@ -30,13 +30,13 @@ namespace Anketa
             (string Name, string Surname, int Age, string[] PetName, string[] FavColors) User;
 
             Console.Write("Введите имя: ");
-            User.Name = Console.ReadLine();
+            User.Name = CheckString();
 
             Console.Write("Введите фамилию: ");
-            User.Surname = Console.ReadLine();
+            User.Surname = CheckString();
 
             Console.Write("Введите возраст: ");
-            User.Age = CheckValue();
+            User.Age = CheckNumber();
 
             int PetCount = 0;
             User.PetName = new string[PetCount];
@@ -49,13 +49,13 @@ namespace Anketa
             if (HavePet == true)
             {
                 Console.Write("Количество петомцев: ");
-                PetCount = CheckValue();
+                PetCount = CheckNumber();
                 Console.WriteLine("Введите имена петомцев");
                 User.PetName = Data(PetCount);
             }
 
             Console.Write("Введите количество любимых цветов: ");
-            int ColorCount = CheckValue();
+            int ColorCount = CheckNumber();
             Console.WriteLine("Введите любимые цвета");
             User.FavColors = Data(ColorCount);
 
@@ -69,13 +69,13 @@ namespace Anketa
             for (int i = 0; i < List.Length; i++)
             {
                 Console.Write((i + 1) + ". ");
-                List[i] = Console.ReadLine();
+                List[i] = CheckString();
             }
 
             return List;
         }
 
-        static int CheckValue()
+        static int CheckNumber()
         {
             do
             {
@@ -84,11 +84,29 @@ namespace Anketa
 
                 if (ModifValue <= 0)
                 {
-                    Console.Write("Ошибка! Введите корректное значение: ");
+                    Console.Write("Ошибка! Введите число: ");
                     continue;
                 }
                 else
                     return ModifValue;
+
+            } while (true);
+        }
+
+        static string CheckString()
+        {
+            do
+            {
+                string str = Console.ReadLine();
+                bool check = int.TryParse(str, out int ModifValue);
+
+                if (check == true)
+                {
+                    Console.Write("Ошибка! Введите строку: ");
+                    continue;
+                }
+                else
+                    return str;
 
             } while (true);
         }
