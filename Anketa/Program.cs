@@ -42,9 +42,29 @@ namespace Anketa
             User.PetName = new string[PetCount];
 
             Console.Write("Есть ли у Вас домашние животные 'да/нет': ");
-            string str = Console.ReadLine();
+            string str;
+            bool HavePet;
 
-            bool HavePet = str == "да" || str == "Да" ? true : false;
+            while (true)
+            {
+                str = Console.ReadLine();
+
+                if (str == "да" || str == "Да")
+                {
+                    HavePet = true;
+                    break;
+                }
+                else if (str == "нет" || str == "Нет")
+                {
+                    HavePet = false;
+                    break;
+                }
+                else
+                {
+                    Console.Write("Ошибка! Введите 'да' или 'нет': ");
+                    continue;
+                }
+            }
 
             if (HavePet == true)
             {
