@@ -4,7 +4,7 @@ namespace Anketa
 {
     class Program
     {
-        static (string Name, string Surname, int Age, bool HavePet, int PetCount, string[] PetName) User()
+        static (string Name, string Surname, byte Age, bool HavePet, byte PetCount, string[] PetName, byte ColorCount, string[] Colors) User()
         {
             Console.Write("Введите имя: ");
             string Name = Console.ReadLine();
@@ -13,7 +13,7 @@ namespace Anketa
             string Surname = Console.ReadLine();
 
             Console.Write("Введите возраст: ");
-            int Age = int.Parse(Console.ReadLine());
+            byte Age = byte.Parse(Console.ReadLine());
 
             byte PetCount = 0;
             string[] PetName = new string[PetCount];
@@ -26,7 +26,12 @@ namespace Anketa
                 PetCount = byte.Parse(Console.ReadLine());
                 PetName = Pet(PetCount);
             }
-            return (Name, Surname, Age, HavePet, PetCount, PetName);
+
+            Console.Write("Введите количество любимых цветов: ");
+            byte ColorCount = byte.Parse(Console.ReadLine());
+            string[] FavColors = Colors(ColorCount);
+
+            return (Name, Surname, Age, HavePet, PetCount, PetName, ColorCount, FavColors);
         }
 
         static string[] Pet(byte PetCount)
@@ -39,6 +44,18 @@ namespace Anketa
                 PetList[i] = Console.ReadLine();
             }
             return PetList;
+        }
+
+        static string[] Colors(byte ColorCount)
+        {
+            string[] ColorList = new string[ColorCount];
+            Console.WriteLine("Введите любимые цвета:");
+            for (int i = 0; i < ColorList.Length; i++)
+            {
+                Console.Write((i + 1) + ".");
+                ColorList[i] = Console.ReadLine();
+            }
+            return ColorList;
         }
 
         static void Main(string[] args)
