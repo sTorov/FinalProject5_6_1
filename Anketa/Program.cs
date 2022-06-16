@@ -4,41 +4,46 @@ namespace Anketa
 {
     class Program
     {
-        static void PrintData((string Name, string Surname, int Age, bool HavePet, int PetCount, string[] PetName, int ColorCount, string[] FavColors) User)
+        static void PrintData((string Name, string Surname, int Age, string[] PetName, string[] FavColors) User)
         {
             Console.WriteLine("\n\n---------------АНКЕТА--------------");
             Console.WriteLine($"Имя: {User.Name}");
             Console.WriteLine($"Фамилия: {User.Surname}");
             Console.WriteLine($"Возраст: {User.Age}");
-            Console.WriteLine($"Наличие петомцев: {User.HavePet}");
-            if (User.HavePet == true)
+
+            if (User.PetName.Length != 0)
             {
-                Console.WriteLine($"Количество петомцев: {User.PetCount}");
                 Console.WriteLine("Клички петомцев");
                 foreach (var item in User.PetName)
                     Console.WriteLine("  " + item);
             }
-            Console.WriteLine($"Количество любимых цветов: {User.ColorCount}");
+            else
+                Console.WriteLine("Нет петомцев");
+
             Console.WriteLine("Любимые цвета");
             foreach (var item in User.FavColors)
                 Console.WriteLine("  " + item);
         }
-        static (string Name, string Surname, int Age, bool HavePet, int PetCount, string[] PetName, int ColorCount, string[] FavColors) User()
+        static (string Name, string Surname, int Age, string[] PetName, string[] FavColors) UserData()
         {
+
+            (string Name, string Surname, int Age, string[] PetName, string[] FavColors) User;
+
             Console.Write("Введите имя: ");
-            string Name = Console.ReadLine();
+            User.Name = Console.ReadLine();
 
             Console.Write("Введите фамилию: ");
-            string Surname = Console.ReadLine();
+            User.Surname = Console.ReadLine();
 
             Console.Write("Введите возраст: ");
-            int Age = CheckValue();
+            User.Age = CheckValue();
 
             int PetCount = 0;
-            string[] PetName = new string[PetCount];
+            User.PetName = new string[PetCount];
 
             Console.Write("Есть ли у Вас домашние животные 'да/нет': ");
             string str = Console.ReadLine();
+
             bool HavePet = str == "да" || str == "Да" ? true : false;
 
             if (HavePet == true)
@@ -46,15 +51,15 @@ namespace Anketa
                 Console.Write("Количество петомцев: ");
                 PetCount = CheckValue();
                 Console.WriteLine("Введите имена петомцев");
-                PetName = Data(PetCount);
+                User.PetName = Data(PetCount);
             }
 
             Console.Write("Введите количество любимых цветов: ");
             int ColorCount = CheckValue();
             Console.WriteLine("Введите любимые цвета");
-            string[] FavColors = Data(ColorCount);
+            User.FavColors = Data(ColorCount);
 
-            return (Name, Surname, Age, HavePet, PetCount, PetName, ColorCount, FavColors);
+            return User;
         }
 
         static string[] Data(int Count)
@@ -63,7 +68,7 @@ namespace Anketa
 
             for (int i = 0; i < List.Length; i++)
             {
-                Console.Write((i + 1) + ".");
+                Console.Write((i + 1) + ". ");
                 List[i] = Console.ReadLine();
             }
 
@@ -90,7 +95,7 @@ namespace Anketa
 
         static void Main(string[] args)
         {
-            var Person = User();
+            var Person = UserData();
 
             PrintData(Person);
 
