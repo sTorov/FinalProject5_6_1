@@ -4,6 +4,25 @@ namespace Anketa
 {
     class Program
     {
+        static void PrintData((string Name, string Surname, int Age, bool HavePet, int PetCount, string[] PetName, int ColorCount, string[] FavColors) User)
+        {
+            Console.WriteLine("\n\n---------------АНКЕТА--------------");
+            Console.WriteLine($"Имя: {User.Name}");
+            Console.WriteLine($"Фамилия: {User.Surname}");
+            Console.WriteLine($"Возраст: {User.Age}");
+            Console.WriteLine($"Наличие петомцев: {User.HavePet}");
+            if (User.HavePet == true)
+            {
+                Console.WriteLine($"Количество петомцев: {User.PetCount}");
+                Console.WriteLine("Клички петомцев");
+                foreach (var item in User.PetName)
+                    Console.WriteLine("  " + item);
+            }
+            Console.WriteLine($"Количество любимых цветов: {User.ColorCount}");
+            Console.WriteLine("Любимые цвета");
+            foreach (var item in User.FavColors)
+                Console.WriteLine("  " + item);
+        }
         static (string Name, string Surname, int Age, bool HavePet, int PetCount, string[] PetName, int ColorCount, string[] FavColors) User()
         {
             Console.Write("Введите имя: ");
@@ -72,6 +91,8 @@ namespace Anketa
         static void Main(string[] args)
         {
             var Person = User();
+
+            PrintData(Person);
 
             Console.ReadKey();
         }
