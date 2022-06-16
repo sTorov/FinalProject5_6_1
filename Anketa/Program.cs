@@ -4,7 +4,7 @@ namespace Anketa
 {
     class Program
     {
-        static (string Name, string Surname, byte Age, bool HavePet, byte PetCount, string[] PetName, byte ColorCount, string[] Colors) User()
+        static (string Name, string Surname, int Age, bool HavePet, int PetCount, string[] PetName, int ColorCount, string[] FavColors) User()
         {
             Console.Write("Введите имя: ");
             string Name = Console.ReadLine();
@@ -13,28 +13,30 @@ namespace Anketa
             string Surname = Console.ReadLine();
 
             Console.Write("Введите возраст: ");
-            byte Age = byte.Parse(Console.ReadLine());
+            int Age = CheckValue();
 
-            byte PetCount = 0;
+            int PetCount = 0;
             string[] PetName = new string[PetCount];
+
             Console.Write("Есть ли у Вас домашние животные 'да/нет': ");
             string str = Console.ReadLine();
             bool HavePet = str == "да" || str == "Да" ? true : false;
+
             if (HavePet == true)
             {
                 Console.Write("Количество петомцев: ");
-                PetCount = byte.Parse(Console.ReadLine());
+                PetCount = CheckValue();
                 PetName = Pet(PetCount);
             }
 
             Console.Write("Введите количество любимых цветов: ");
-            byte ColorCount = byte.Parse(Console.ReadLine());
+            int ColorCount = CheckValue();
             string[] FavColors = Colors(ColorCount);
 
             return (Name, Surname, Age, HavePet, PetCount, PetName, ColorCount, FavColors);
         }
 
-        static string[] Pet(byte PetCount)
+        static string[] Pet(int PetCount)
         {
             string[] PetList = new string[PetCount];
             Console.WriteLine("Введите имена петомцев:");
@@ -46,7 +48,7 @@ namespace Anketa
             return PetList;
         }
 
-        static string[] Colors(byte ColorCount)
+        static string[] Colors(int ColorCount)
         {
             string[] ColorList = new string[ColorCount];
             Console.WriteLine("Введите любимые цвета:");
@@ -56,6 +58,24 @@ namespace Anketa
                 ColorList[i] = Console.ReadLine();
             }
             return ColorList;
+        }
+
+        static int CheckValue()
+        {
+            do
+            {
+                string Value = Console.ReadLine();
+                int.TryParse(Value, out int ModifValue);
+
+                if (ModifValue <= 0)
+                {
+                    Console.Write("Ошибка! Введите корректное значение: ");
+                    continue;
+                }
+                else
+                    return ModifValue;
+
+            } while (true);
         }
 
         static void Main(string[] args)
