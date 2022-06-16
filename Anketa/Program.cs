@@ -26,38 +26,29 @@ namespace Anketa
             {
                 Console.Write("Количество петомцев: ");
                 PetCount = CheckValue();
-                PetName = Pet(PetCount);
+                Console.WriteLine("Введите имена петомцев");
+                PetName = Data(PetCount);
             }
 
             Console.Write("Введите количество любимых цветов: ");
             int ColorCount = CheckValue();
-            string[] FavColors = Colors(ColorCount);
+            Console.WriteLine("Введите любимые цвета");
+            string[] FavColors = Data(ColorCount);
 
             return (Name, Surname, Age, HavePet, PetCount, PetName, ColorCount, FavColors);
         }
 
-        static string[] Pet(int PetCount)
+        static string[] Data(int Count)
         {
-            string[] PetList = new string[PetCount];
-            Console.WriteLine("Введите имена петомцев:");
-            for (int i = 0; i < PetList.Length; i++)
-            {
-                Console.Write((i + 1) + ".");
-                PetList[i] = Console.ReadLine();
-            }
-            return PetList;
-        }
+            string[] List = new string[Count];
 
-        static string[] Colors(int ColorCount)
-        {
-            string[] ColorList = new string[ColorCount];
-            Console.WriteLine("Введите любимые цвета:");
-            for (int i = 0; i < ColorList.Length; i++)
+            for (int i = 0; i < List.Length; i++)
             {
                 Console.Write((i + 1) + ".");
-                ColorList[i] = Console.ReadLine();
+                List[i] = Console.ReadLine();
             }
-            return ColorList;
+
+            return List;
         }
 
         static int CheckValue()
